@@ -1,26 +1,26 @@
+const db = require("../../data/dbConfig")
 
+const validateRequired = (req, res, next) => {
 
-  projectsFromDB.forEach( (item) => {
-   if(item.project_completed === 0){
-      item.project_completed = false;
+   let checkRequired;
+
+   if(req.body.project_name){
+      checkRequired = req.body.project_name
    }
-   if(item.project_completed === 1){
-      item.project_completed = true;
+   if(req.body.resource_name){
+      checkRequired = req.body.resource_name
    }
-})
+   if(req.body.task_description){   
+      checkRequired = req.body.task_description
+   }
 
-function convertIntToBool (databaseObject) {
 
-   databaseObject.forEach( (item) => {
-      if(item.project_completed === 0){
-         item.project_completed = false;
-      }
-      if(item.project_completed === 1){
-         item.project_completed = true;
-      }
-   })
+   if(!checkRequired || checkRequired === "" || typeof(checkRequired) !== "string" ){
+      return res.status(400).json({message: "You are missing a required field" })
+   }
 
+   next()
 }
 
-module.exports = { convertIntToBool }
+module.exports = { validateRequired }
 

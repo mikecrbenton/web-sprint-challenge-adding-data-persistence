@@ -1,6 +1,6 @@
 const express = require("express")
 const Resource = require("./model")
-//const { checkRecipeId } = require('../middleware/index')
+const { validateRequired } = require('../middleware/index')
 
 const router = express.Router()
 
@@ -13,7 +13,7 @@ router.get("/api/resources", async (req, res, next) => {
 	}
 })
 
-router.post('/api/resources', (req, res, next) => {
+router.post('/api/resources', validateRequired, (req, res, next) => {
    Resource.insertResource(req.body)
       .then((data) => {
          res.status(201).json(data)

@@ -1,6 +1,6 @@
 const express = require("express")
 const Projects = require("./model")
-//const { checkRecipeId } = require('../middleware/index')
+const { validateRequired } = require('../middleware/index')
 
 const router = express.Router()
 
@@ -23,7 +23,7 @@ router.get("/api/projects", async (req, res, next) => {
 	}
 })
 
-router.post('/api/projects', (req, res, next) => {
+router.post('/api/projects',validateRequired, (req, res, next) => {
    Projects.insertProject(req.body)
       .then((data) => {
          if(data.project_completed === 0){

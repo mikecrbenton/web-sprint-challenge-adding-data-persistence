@@ -1,5 +1,5 @@
 exports.seed = async function(knex) {
-	await knex("resource").insert([   
+	await knex("resources").insert([   
 		{ resource_name: "Hammer", 
         resource_description: "You are full of surprises, Master Baggins."
       },

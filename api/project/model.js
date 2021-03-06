@@ -11,6 +11,15 @@ function getProjects(){
    return db("projects")
 }
 
+// STRETCH GOAL 1 OF 3
+function getProjectResources(project_id) {
+   return db("project_resources as PR") // IN MANY-TO-MANY - JOIN TABLE AS THE MAIN TABLE
+      .select(["P.project_name","R.*"])
+      .innerJoin("projects as P", "P.project_id", "PR.project_id") 
+      .innerJoin("resources as R", "R.resource_id", "PR.resource_id") 
+      .where("P.project_id", project_id) // dynamic aspect ( user input )
+}
+
 function insertProject(newProject) {
    return db('projects').insert(newProject)
      .then( (returnedProject) => {
@@ -18,8 +27,8 @@ function insertProject(newProject) {
      });
  }
 
-
 module.exports = {
    getProjects,
-   insertProject
+   insertProject,
+   getProjectResources
 }

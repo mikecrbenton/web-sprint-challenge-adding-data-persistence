@@ -14,11 +14,9 @@ const validateRequired = (req, res, next) => {
       checkRequired = req.body.task_description
    }
 
-
    if(!checkRequired || checkRequired === "" || typeof(checkRequired) !== "string" ){
       return res.status(400).json({message: "You are missing a required field" })
    }
-
    next()
 }
 

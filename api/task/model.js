@@ -18,7 +18,6 @@ function insertTask(newTask) {
      });
  }
 
-
 module.exports = {
    getTasks,
    insertTask

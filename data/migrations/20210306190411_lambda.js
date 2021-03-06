@@ -38,11 +38,9 @@ exports.up = async function(knex) {
       table.boolean("task_completed")
       table.integer("project_id").references("project_id").inTable("projects")
    })
-
 };
 
-exports.down = async function(knex) {
-     
+exports.down = async function(knex) {  
      await knex.schema.dropTableIfExists("tasks") // 4
      await knex.schema.dropTableIfExists("project_resources") // 3
      await knex.schema.dropTableIfExists("resources")  // 2

@@ -39,5 +39,4 @@ router.post('/api/tasks', validateRequired, (req, res, next) => {
       })
 });
 
-
 module.exports = router

@@ -39,7 +39,22 @@ router.post('/api/projects',validateRequired, (req, res, next) => {
       })
 });
 
+router.get("/api/projects/:project_id", async (req, res, next) => {
+	try {
+		const projectResourcesFromDB = await Projects.getProjectResources(req.params.project_id)
 
-
+      projectResourcesFromDB.forEach( (item) => {
+         if(item.project_completed === 0){
+            item.project_completed = false;
+         }
+         if(item.project_completed === 1){
+            item.project_completed = true;
+         }
+      })
+		res.json(projectResourcesFromDB)
+	} catch(err) {
+		next(err)
+	}
+})
 
 module.exports = router

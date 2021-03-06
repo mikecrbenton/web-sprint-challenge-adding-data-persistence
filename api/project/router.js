@@ -4,13 +4,7 @@ const Projects = require("./model")
 
 const router = express.Router()
 
-router.get("/api/resources", async (req, res, next) => {
-	try {
-		res.json("working")
-	} catch(err) {
-		next(err)
-	}
-})
+
 
 
 
